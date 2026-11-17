@@ -36,6 +36,16 @@ public class Rat : MonoBehaviour
 
 
         // STEP 2 -------------------------------------------------------------
+        if (collision.gameObject.CompareTag("Attack"))
+        {
+            for (int i = 0; i < _spawnAmount; i++)
+            {
+                SpawnSmallRat();
+            }
+            transform.localScale -= Vector3.one * _shrinkAmount;
+            SpawnExplosion(_colors[_colorIndex]);
+            _colorIndex = (_colorIndex + 1) % _colors.Length;
+        }
     }
 
     // ------------------------------------------------------------------------
@@ -60,9 +70,9 @@ public class Rat : MonoBehaviour
         //      rotation correctly.
         // Your game should look exaclty like the finished example.
 
-        //float randomAngle = Random.Range(0, 360);
-        //Vector3 rotationAngles = new Vector3(0, randomAngle, 0);
-        //rat.transform.Rotate(rotationAngles);
+        float randomAngle = Random.Range(0f, 360f);
+        Vector3 rotationAngles = new Vector3(0, 0, randomAngle);
+        rat.transform.Rotate(rotationAngles);
 
         // STEP 3 -------------------------------------------------------------
     }
